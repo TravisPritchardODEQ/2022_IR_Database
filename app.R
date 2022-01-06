@@ -80,12 +80,12 @@ ui <- navbarPage("2022 Draft Integrated Report",
                                   
                                   selectizeInput("AUs",
                                                  "Select Assessment Unit",
-                                                 choices = AU_s,
+                                                 choices = NULL,
                                                  multiple = TRUE,
                                                  options = list(maxOptions = 7000)),
                                   selectizeInput("Select_AUName",
                                                  "Select AU Name",
-                                                 choices = AU_Names,
+                                                 choices = NULL,
                                                  multiple = TRUE,
                                                  options = list(maxOptions = 7000)),
                                   selectizeInput("admin_basin_selector",
@@ -121,7 +121,7 @@ ui <- navbarPage("2022 Draft Integrated Report",
                                                        p("DEQ recommends using the current version of Google Chrome or Mozilla Firefox for this application.", style = "font-family: 'times'"),
                                                        p("The 2022 Draft Integrated Report Assessment Database contains new assessment information and updates to assessments from 1998, 2002, 2004, 2010, and 2012. (See",
                                                          a("2012 Integrated Report Database", href="https://www.deq.state.or.us/wq/assessment/rpt2012/search.asp", target="_blank"),"). The current assessment categorizations  
-                             are described in the “Parameter_category” report field. The “Assessed_in_2018” report field indicates if new data evaluations or assessments were done in 2022 Draft, otherwise
+                             are described in the “Parameter_category” report field. The “Assessed_2022” report field indicates if new data evaluations or assessments were done in 2022 Draft, otherwise
                              the status assigned in previous assessments was carried forward from previous reports. Assessment categorized as Category 4 or Category 5 (including all subcategories) are considered impaired.", style = "font-family: 'times'"),
                              p("Click on ", strong("Raw Data Download"), "in the header at the top of this page to access raw data used in 2022 Draft assessments.", style = "font-family: 'times'"),
                              p( 
@@ -202,7 +202,7 @@ ui <- navbarPage("2022 Draft Integrated Report",
                                   downloadButton('downloadData', label = "Download Assessment Data by Unit"),
                                   selectizeInput("Data_AUs",
                                                  "Select one or more Assessment Units",
-                                                 choices = assessed_AUs,
+                                                 choices = NULL,
                                                  multiple = TRUE,
                                                  options = list(maxOptions = 7000))
                                   
@@ -284,8 +284,11 @@ server <- function(input, output, session) {
     
     
     
+    updateSelectizeInput(session, 'AUs', choices = AU_s, server = TRUE)
+    updateSelectizeInput(session, 'Select_AUName', choices = AU_Names, server = TRUE)
+    updateSelectizeInput(session, 'Data_AUs', choices = assessed_AUs, server = TRUE)
     
-    
+ 
     # Table_data --------------------------------------------------------------
     
     
