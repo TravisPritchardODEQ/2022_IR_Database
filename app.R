@@ -1,6 +1,6 @@
 
 library(shiny)
-library(tidyverse)
+library(dplyr)
 library(shinybusy)
 library(knitr)
 library(kableExtra)
@@ -349,8 +349,7 @@ server <- function(input, output, session) {
             
             
         }
-        t <- t %>%
-            select(-Pollutant)
+        t <- t 
         
         t
         
