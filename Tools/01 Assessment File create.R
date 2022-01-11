@@ -30,7 +30,8 @@ Parameter_assessments <- AU_all_basin %>%
   select(AU_ID, AU_Name, AU_Description,  OWRD_Basin, Pollu_ID, wqstd_code, Assessment, Pollutant,
          period, DO_Class, stations, AU_final_status, Rationale, assessed_2022,year_assessed,  AU_delist, Year_listed, 
          recordID) %>%
-  rename(Parameter_category = AU_final_status)
+  rename(Parameter_category = AU_final_status) %>%
+  mutate(Rationale = str_replace(Rationale, 'Â°', '° C'))
 
 
 assessed_AUs <- unique(Parameter_assessments$AU_ID)
