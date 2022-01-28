@@ -96,12 +96,14 @@ addWorksheet(wb,'Tox_AL_Ammonia')
 addWorksheet(wb,'Tox_AL_CU')
 addWorksheet(wb, 'Tox_AL_Hardness_Metals')
 addWorksheet(wb, 'Tox_AL_Pentachlorophenol')
+addWorksheet(wb, 'Tox_AL_Aluminum')
 
 writeData(wb,  'Tox_AL_Others',Tox_AL_Others, rowNames = FALSE)
 writeData(wb, 'Tox_AL_Ammonia',  Tox_AL_Ammonia, rowNames = FALSE)
 writeData(wb, 'Tox_AL_CU',  Tox_AL_CU, rowNames = FALSE)
 writeData(wb, 'Tox_AL_Hardness_Metals',  Tox_AL_Hardness_Metals, rowNames = FALSE)
 writeData(wb, 'Tox_AL_Pentachlorophenol',Tox_AL_Penta, rowNames = FALSE)
+writeData(wb, 'Tox_AL_Aluminum',Tox_AL_aluminum, rowNames = FALSE)
 
 saveWorkbook(wb, file = "Aquatic_Life_Toxics.xlsx", 
              overwrite = TRUE)

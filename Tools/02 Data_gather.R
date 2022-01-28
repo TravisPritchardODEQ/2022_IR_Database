@@ -127,6 +127,6 @@ Habs_data <- read.xlsx("C:/Users/tpritch/Documents/IR_2022/Rollups/Rollup Assess
 
 save(bacteria_coast_contact,bacteria_fresh_contact, chl, DO_cont_spawn, DO_cont_yearround, 
      DO_instant_spawn, DO_inst_yearround, pH, temp,  Tox_AL_Ammonia,Tox_AL_CU,Tox_AL_Hardness_Metals,
-     Tox_AL_Others, Tox_AL_Penta, Tox_HH,  biocriteria,turbidity_data,Habs_data, file = "Data/IR_data.Rdata" )
+     Tox_AL_Others, Tox_AL_Penta, Tox_AL_aluminum, Tox_HH,  biocriteria,turbidity_data,Habs_data, file = "Data/IR_data.Rdata" )
 
 

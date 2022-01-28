@@ -461,6 +461,8 @@ server <- function(input, output, session) {
         filtered_Tox_AL_Penta <- Tox_AL_Penta %>%
             filter(AU_ID %in% input$Data_AUs)
         
+        filtered_Tox_AL_aluminum<- Tox_AL_aluminum %>%
+          filter(AU_ID %in% input$Data_AUs)
 
         filtered_Tox_HH <- Tox_HH %>%
             filter(AU_ID %in% input$Data_AUs)
@@ -493,6 +495,7 @@ server <- function(input, output, session) {
                     filtered_Tox_AL_Hardness_Metals = filtered_Tox_AL_Hardness_Metals,
                     filtered_Tox_AL_Others = filtered_Tox_AL_Others,
                     filtered_Tox_AL_Penta =filtered_Tox_AL_Penta,
+                    filtered_Tox_AL_aluminum = filtered_Tox_AL_aluminum,
                     filtered_Tox_HH = filtered_Tox_HH,
                    
                     filtered_biocriteria = filtered_biocriteria,
@@ -507,7 +510,7 @@ server <- function(input, output, session) {
     
     
     output$downloadData <- downloadHandler(
-        filename = '2018_2020_IR_select_data_download.zip',
+        filename = '2022_IR_select_data_download.zip',
         content = function(fname) {
             original_wd <- getwd()
             tmpdir <- tempdir()
@@ -586,12 +589,15 @@ server <- function(input, output, session) {
             addWorksheet(wb,'Tox_AL_CU')
             addWorksheet(wb, 'Tox_AL_Hardness_Metals')
             addWorksheet(wb, 'Tox_AL_Pentachlorophenol')
+            addWorksheet(wb, 'filtered_Tox_AL_aluminum')
+            
             
             writeData(wb,  'Tox_AL_Others', filtered_data()$filtered_Tox_AL_Others, rowNames = FALSE)
             writeData(wb, 'Tox_AL_Ammonia',  filtered_data()$filtered_Tox_AL_Ammonia, rowNames = FALSE)
             writeData(wb, 'Tox_AL_CU',  filtered_data()$filtered_Tox_AL_CU, rowNames = FALSE)
             writeData(wb, 'Tox_AL_Hardness_Metals',  filtered_data()$filtered_Tox_AL_Hardness_Metals, rowNames = FALSE)
             writeData(wb, 'Tox_AL_Pentachlorophenol',  filtered_data()$filtered_Tox_AL_Penta, rowNames = FALSE)
+            writeData(wb, 'filtered_Tox_AL_aluminum',  filtered_data()$filtered_Tox_AL_aluminum, rowNames = FALSE)
             
             saveWorkbook(wb, file = "Aquatic_Life_Toxics.xlsx", 
                          overwrite = TRUE)
@@ -745,11 +751,11 @@ server <- function(input, output, session) {
     
     output$downloadallData <-  downloadHandler(
         filename <- function() {
-            paste("2018_2020_IR_all_data_download", "zip", sep=".")
+            paste("2022_IR_all_data_download", "zip", sep=".")
         },
         
         content <- function(file) {
-            file.copy("data/All_data.zip", file)
+            file.copy("Data/All_data.zip", file)
         },
         contentType = "application/zip"
     )
