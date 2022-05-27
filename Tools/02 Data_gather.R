@@ -71,7 +71,7 @@ pH <- bind_rows(pH_WS,pH_other )%>%
 
 # temp ------------------------------------------------------------------------------------------------------------
 
-temp <- read.xlsx("C:/Users/tpritch/Documents/IR_2022/Rollups/Rollup Assessment/temperature- data.xlsx")%>%
+temp <- read.xlsx("C:/Users/tpritch/Oregon/DEQ - Integrated Report - IR 2022/Draft List/Raw Data/temperature- data.xlsx")%>%
   arrange(AU_ID, MLocID, SampleStartDate)
 
 
