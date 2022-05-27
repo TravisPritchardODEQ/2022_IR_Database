@@ -59,7 +59,7 @@ ben_uses <- c(
 
 
 #Create the page
-ui <- navbarPage("2022 Draft Integrated Report",
+ui <- navbarPage("2022 State Final Integrated Report",
                  theme = shinytheme("yeti"),
                  inverse = TRUE,
                  collapsible = TRUE,
@@ -69,8 +69,8 @@ ui <- navbarPage("2022 Draft Integrated Report",
                           titlePanel(
                               fluidRow(
                                   column(6, img(src = "logo.png")), 
-                                  column(6,  "2022 Draft Integrated Report",style = "font-family: 'Arial'; font-si16pt; vertical-align: 'bottom'")),
-                              windowTitle = "2022 Draft Integrated Report"
+                                  column(6,  "2022 State Final Integrated Report",style = "font-family: 'Arial'; font-si16pt; vertical-align: 'bottom'")),
+                              windowTitle = "2022 State Final Integrated Report"
                           ),
                           
                           # Sidebar with a slider input for number of bins 
@@ -117,19 +117,19 @@ ui <- navbarPage("2022 Draft Integrated Report",
                                               id = "Tabset",
                                               tabPanel("Instructions",
                                                        value = "InstructionTab",
-                                                       h2(strong(" Instructions to Review the 2022 Draft Integrated Report Database"), style = "font-family: 'Arial'"),
+                                                       h2(strong(" Instructions to Review the 2022 State Final Integrated Report Database"), style = "font-family: 'Arial'"),
                                                        p("DEQ recommends using the current version of Google Chrome or Mozilla Firefox for this application.", style = "font-family: 'times'"),
-                                                       p("The 2022 Draft Integrated Report Assessment Database contains new assessment information and updates to assessments from 1998, 2002, 2004, 2010, and 2012. (See",
-                                                         a("2012 Integrated Report Database", href="https://www.deq.state.or.us/wq/assessment/rpt2012/search.asp", target="_blank"),"). The current assessment categorizations  
+                                                       p("DEQ submitted its 2022 Integrated Report to EPA on May 23, 2022. The report is now considered “state final” and is awaiting EPA approval. The 2018/2020 Integrated Report remains in effect until EPA approval of the report.  The 2022 State Final Integrated Report Assessment Database contains new assessment information and updates to assessments from 1998, 2002, 2004, 2010, 2012, and 2018/2020. (See",
+                                                         a("2018/2020 Integrated Report Database", href="https://rstudioconnect.deq.state.or.us/content/5ef6752f-14a6-4950-8959-645b090b38dd", target="_blank"),"). The current assessment categorizations  
                              are described in the “Parameter_category” report field. The “Assessed_2022” report field indicates if new data evaluations or assessments were done in 2022 Draft, otherwise
                              the status assigned in previous assessments was carried forward from previous reports. Assessment categorized as Category 4 or Category 5 (including all subcategories) are considered impaired.", style = "font-family: 'times'"),
                              p("Click on ", strong("Raw Data Download"), "in the header at the top of this page to access raw data used in 2022 Draft assessments.", style = "font-family: 'times'"),
                              p( 
-                                 a("The 2022 Draft Assessment Methodology can be found here.", href="https://www.oregon.gov/deq/wq/Documents/IR22AssessMethod.pdf", target="_blank"), style = "font-family: 'times'"),
+                                 a("The 2022 Assessment Methodology can be found here.", href="https://www.oregon.gov/deq/wq/Documents/IR22AssessMethod.pdf", target="_blank"), style = "font-family: 'times'"),
                              p("A more complete mapping and dataset, including water quality standards information can be found on the ", 
                                a("Interactive Web Map.", href="https://hdcgcx2.deq.state.or.us/HVR291/?viewer=wqsa#", target="_blank"), style = "font-family: 'times'"),
                              p("The DEQ 2022 Draft IR webpage page can be found", a("here.", href="https://www.oregon.gov/deq/wq/Pages/proposedIR.aspx", target="_blank"), style = "font-family: 'times'"),
-                             p("Water quality data used in assessments can also be downloaded from ", a("AWQMS.", href="https://www.oregon.gov/deq/wq/Pages/WQdata.aspx", target="_blank"),  style = "font-family: 'times'"),
+                             p("In addition to the Raw Data tab, water quality data used in assessments can also be downloaded from ", a("AWQMS.", href="https://www.oregon.gov/deq/wq/Pages/WQdata.aspx", target="_blank"),  style = "font-family: 'times'"),
                              p(strong("Use search criteria on left to filter results. Press the filter button to see assessment results"), style = "font-family: 'times'"),
                              p(strong("Information for each record in the assessment database includes:"), style = "font-family: 'times'"),
                              tags$ul(
@@ -191,8 +191,8 @@ ui <- navbarPage("2022 Draft Integrated Report",
                           titlePanel(
                               fluidRow(
                                   column(6, img(src = "logo.png")), 
-                                  column(6,  "2022 Draft Integrated Report Data Download",style = "font-family: 'Arial'; font-si16pt; vertical-align: 'bottom'")),
-                              windowTitle = "2022 Draft Integrated Report Data"
+                                  column(6,  "2022 State Final Integrated Report Data Download",style = "font-family: 'Arial'; font-si16pt; vertical-align: 'bottom'")),
+                              windowTitle = "2022 State Final Integrated Report Data"
                           ),
                           sidebarLayout(
                               sidebarPanel(
