@@ -8,6 +8,7 @@ library(shinythemes)
 library(shinyWidgets)
 library(openxlsx)
 library(zip)
+library(DT)
 
 
 
@@ -59,7 +60,7 @@ ben_uses <- c(
 
 
 #Create the page
-ui <- navbarPage("2022 State Final Integrated Report",
+ui <- navbarPage("2022 Final Integrated Report",
                  theme = shinytheme("yeti"),
                  inverse = TRUE,
                  collapsible = TRUE,
@@ -69,8 +70,8 @@ ui <- navbarPage("2022 State Final Integrated Report",
                           titlePanel(
                               fluidRow(
                                   column(6, img(src = "logo.png")), 
-                                  column(6,  "2022 State Final Integrated Report",style = "font-family: 'Arial'; font-si16pt; vertical-align: 'bottom'")),
-                              windowTitle = "2022 State Final Integrated Report"
+                                  column(6,  "2022 Final Integrated Report",style = "font-family: 'Arial'; font-si16pt; vertical-align: 'bottom'")),
+                              windowTitle = "2022 Final Integrated Report"
                           ),
                           
                           # Sidebar with a slider input for number of bins 
@@ -117,9 +118,9 @@ ui <- navbarPage("2022 State Final Integrated Report",
                                               id = "Tabset",
                                               tabPanel("Instructions",
                                                        value = "InstructionTab",
-                                                       h2(strong(" Instructions to Review the 2022 State Final Integrated Report Database"), style = "font-family: 'Arial'"),
+                                                       h2(strong(" Instructions to Review the 2022 Final Integrated Report Database"), style = "font-family: 'Arial'"),
                                                        p("DEQ recommends using the current version of Google Chrome or Mozilla Firefox for this application.", style = "font-family: 'times'"),
-                                                       p("DEQ submitted its 2022 Integrated Report to EPA on May 23, 2022. The report is now considered “state final” and is awaiting EPA approval. The 2018/2020 Integrated Report remains in effect until EPA approval of the report.  The 2022 State Final Integrated Report Assessment Database contains new assessment information and updates to assessments from 1998, 2002, 2004, 2010, 2012, and 2018/2020. (See",
+                                                       p("DEQ submitted its 2022 Integrated Report to EPA on May 23, 2022. The report is now considered “final” and recieved EPA approval. The 2018/2020 Integrated Report remains in effect until EPA approval of the report.  The 2022 Final Integrated Report Assessment Database contains new assessment information and updates to assessments from 1998, 2002, 2004, 2010, 2012, and 2018/2020. (See",
                                                          a("2018/2020 Integrated Report Database", href="https://rstudioconnect.deq.state.or.us/content/5ef6752f-14a6-4950-8959-645b090b38dd", target="_blank"),"). The current assessment categorizations  
                              are described in the “Parameter_category” report field. The “Assessed_2022” report field indicates if new data evaluations or assessments were done in 2022 Draft, otherwise
                              the status assigned in previous assessments was carried forward from previous reports. Assessment categorized as Category 4 or Category 5 (including all subcategories) are considered impaired.", style = "font-family: 'times'"),
@@ -170,7 +171,7 @@ ui <- navbarPage("2022 State Final Integrated Report",
                                               ),
                              tabPanel("Assessments",
                                       value = "Datatab",
-                                      downloadButton('downloadassessmentData', label = "Download Assessment Results"),
+                                      #downloadButton('downloadassessmentData', label = "Download Assessment Results"),
                                       dataTableOutput('table')
                              )
                                   )
@@ -191,8 +192,8 @@ ui <- navbarPage("2022 State Final Integrated Report",
                           titlePanel(
                               fluidRow(
                                   column(6, img(src = "logo.png")), 
-                                  column(6,  "2022 State Final Integrated Report Data Download",style = "font-family: 'Arial'; font-si16pt; vertical-align: 'bottom'")),
-                              windowTitle = "2022 State Final Integrated Report Data"
+                                  column(6,  "2022 Final Integrated Report Data Download",style = "font-family: 'Arial'; font-si16pt; vertical-align: 'bottom'")),
+                              windowTitle = "2022 Final Integrated Report Data"
                           ),
                           sidebarLayout(
                               sidebarPanel(
@@ -349,7 +350,8 @@ server <- function(input, output, session) {
             
             
         }
-        t <- t 
+        t <- t %>%
+          select(-row_num)
         
         t
         
@@ -376,29 +378,27 @@ server <- function(input, output, session) {
     #render the table from the reactive table_Data 
     # Reactive function
     
-    output$table <- renderDataTable(
+    output$table <- DT::renderDataTable({
         
-        table_Data(),
-        options = list(paging = FALSE)
+      DT::datatable( table_Data(),
+                     extensions = 'Buttons',
+                     options = list(
+                       paging = FALSE,
+                       searching = TRUE,
+                       fixedColumns = TRUE,
+                       autoWidth = TRUE,
+                       ordering = TRUE,
+                       dom = 'Bfrtip',
+                       buttons = c('copy', 'csv', 'excel')
+                     ),
+                     rownames= FALSE)
         
         
-    )
+    })
     
     
-    # Download button actions -------------------------------------------------
-    
-    
-    #Handle the download output.
-    output$downloadassessmentData <- downloadHandler(
-        filename = function() { 
-            paste("Oregon 2020 Integrated Report Filtered Download", ".csv", sep="")
-        },
-        content = function(file) {
-            write.csv(table_Data(), file, row.names = FALSE,  na = "")
-        })
-    
-    
-    
+
+
     # When filter button is hit. move focus to data tab -----------------------
     
     observeEvent(input$go, {
